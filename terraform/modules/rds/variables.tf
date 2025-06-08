@@ -1,4 +1,7 @@
 variable "db_username" {}
 variable "db_password" {}
-variable "private_subnet_id" {}
+variable "private_subnet_ids" {
+  type = list(string)
+}
+
 variable "security_group_id" {}

@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "moodle" {
   name       = "moodle-subnet-group"
-  subnet_ids = [var.private_subnet_id]
+ subnet_ids = var.private_subnet_ids
 }
 
 resource "aws_db_instance" "moodle" {
