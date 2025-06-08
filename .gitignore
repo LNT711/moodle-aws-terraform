@@ -1,0 +1,29 @@
+# Ignorar la carpeta de caché de Terraform
+.terraform/
+
+# Ignorar archivos de estado
+*.tfstate
+*.tfstate.*
+
+# Permitir terraform.tfvars pero ignorar otros .tfvars
+!terraform.tfvars
+*.tfvars.json
+
+# Lockfile (se puede regenerar)
+.terraform.lock.hcl
+
+# Archivos del plan
+*.tfplan
+
+# Archivos de backup
+*.backup
+crash.log
+
+# Archivos de editores
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Sistema
+Thumbs.db
