@@ -22,6 +22,14 @@ resource "aws_security_group" "app_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+    # RDS acepta tráfico en el puerto 3306 desde ECS (como comparten el SG, se permite a sí mismo)
+  ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    self            = true  # clave para permitir acceso interno entre miembros del mismo SG
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
