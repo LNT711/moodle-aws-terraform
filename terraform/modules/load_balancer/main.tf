@@ -15,12 +15,13 @@ resource "aws_lb_target_group" "app_tg" {
 
   health_check {
     path                = "/"
-    port                = "traffic-port"
+    port                = "8080"
+    protocol            = "HTTP"
     matcher             = "200-399"
-    interval            = 60
-    timeout             = 20
+    interval            = 180
+    timeout             = 50
     healthy_threshold   = 2
-    unhealthy_threshold = 5
+    unhealthy_threshold = 10
   }
 }
 
