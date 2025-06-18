@@ -10,6 +10,21 @@ resource "aws_ecs_task_definition" "moodle" {
   memory                   = "2048"
   execution_role_arn       = "arn:aws:iam::043784813520:role/LabRole"
   
+  volume {
+  name = "efs-volume"
+
+  efs_volume_configuration {
+    file_system_id          = var.efs_id
+    transit_encryption      = "ENABLED"
+    root_directory          = "/"
+    authorization_config {
+      access_point_id = null
+      iam             = "DISABLED"
+    }
+  }
+}
+
+
   container_definitions = jsonencode([{
     name      = "moodle"
     image     = var.docker_image
@@ -27,17 +42,14 @@ resource "aws_ecs_task_definition" "moodle" {
         }
       }
 
-      #mountPoints = [
-     # {
-      #  sourceVolume  = "moodle-volume",
-      #  containerPath = "/bitnami/moodle"
-      #},
-      #{
-        #sourceVolume  = "moodledata-volume"
-        #containerPath = "/bitnami/moodledata"
-      #}
-    #]
+    mountPoints = [
+          {
+            sourceVolume  = "efs-volume"
+            containerPath = "/bitnami/moodledata"
+            readOnly      = false
+          }
 
+        ]
 
     environment = [
       { name = "MOODLE_DATABASE_HOST", value = var.db_host },
@@ -53,15 +65,6 @@ resource "aws_ecs_task_definition" "moodle" {
       { name = "MOODLE_SKIP_INSTALL", value = "no" }
     ]
   }])
-
-  #volume {
-  #  name = "moodle-volume"
-  #}
-  
-  #volume {
-   # name = "moodledata-volume"
-  #}
-
 }
 
 

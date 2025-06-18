@@ -26,6 +26,12 @@ module "rds" {
   security_group_id = module.security_groups.app_sg_id
 }
 
+module "efs" {
+  source            = "./modules/efs"
+  subnet_ids        = module.vpc.private_subnet_ids
+  security_group_id = module.security_groups.app_sg_id
+}
+
 module "ecs" {
   source             = "./modules/ecs"
   docker_image       = var.docker_image
@@ -36,5 +42,6 @@ module "ecs" {
   private_subnet_ids = module.vpc.private_subnet_ids
   security_group_id  = module.security_groups.app_sg_id
   target_group_arn   = module.load_balancer.target_group_arn
-  depends_on         = [module.rds]
+  depends_on         = [module.rds, module.efs]
+  efs_id             = module.efs.efs_id
 }

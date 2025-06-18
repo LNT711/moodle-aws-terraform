@@ -12,3 +12,7 @@ variable "target_group_arn" {}
 variable "private_subnet_ids" {
   type = list(string)
 }
+
+variable "efs_id" {
+  type = string
+}
