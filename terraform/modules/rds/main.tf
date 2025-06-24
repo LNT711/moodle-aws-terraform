@@ -40,4 +40,5 @@ resource "aws_db_instance" "moodle" {
   vpc_security_group_ids  = [var.security_group_id]
   db_subnet_group_name    = aws_db_subnet_group.moodle.name
   parameter_group_name    = aws_db_parameter_group.moodle.name
+  multi_az                = true
 }
