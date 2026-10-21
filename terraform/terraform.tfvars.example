@@ -1,0 +1,10 @@
+# Copiar como terraform.tfvars y completar. terraform.tfvars está en .gitignore.
+aws_access_key    = "<AWS_ACCESS_KEY_ID>"
+aws_secret_key    = "<AWS_SECRET_ACCESS_KEY>"
+aws_session_token = "<AWS_SESSION_TOKEN>"
+aws_region        = "us-east-1"
+
+docker_image = "<usuario>/moodle-tfm:latest"
+db_user      = "<usuario_db>"
+db_password  = "<contraseña_segura>"
+key_name     = "<nombre_par_de_claves_ssh>"

@@ -5,9 +5,10 @@
 *.tfstate
 *.tfstate.*
 
-# Permitir terraform.tfvars pero ignorar otros .tfvars
-!terraform.tfvars
+# Variables con credenciales: nunca versionar (usar terraform.tfvars.example)
+*.tfvars
 *.tfvars.json
+!*.tfvars.example
 
 # Lockfile (se puede regenerar)
 .terraform.lock.hcl
